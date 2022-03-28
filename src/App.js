@@ -7,7 +7,8 @@ import StopList from "./compoents/Stops/StopList";
 import { CssBaseline, Grid, List, Typography, Slider } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getStopschedule } from "./api";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { increment } from "./redux/Actions";
 const theme = createTheme({
   palette: {
     type: "light",
@@ -27,7 +28,7 @@ export const App = () => {
   const [radius, Setradius] = useState(["250"]);
   const [stopSchedule, setstopSchedule] = useState([]);
   const [stop,setstop]= useState([])
-  const isloggedin = useSelector(state=>state.isloggedin)
+  const stopno = useSelector(state=>state.stopno)
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -49,24 +50,23 @@ export const App = () => {
     });
   }, [radius,coordinate]);
   useEffect(() => {
-    getStopschedule(stop).then((data) => {
-      console.log(data);
+    getStopschedule(stopno).then((data) => {
       setstopSchedule(data);
+      console.log(stopSchedule);
     });
-  }, []);
+  }, [stopno]);
 
   return (
     <CssBaseline>
       <ThemeProvider theme={theme}>
-        <Header>{console.log(isloggedin)}</Header>
+        <Header>  </Header>
         <Grid container spacing={3} style={{ width: "100%" }}>
           <Grid item xs={12} md={4}>
             <StopList
               NearbyStops={NearbyStops}
               Setradius={Setradius}
               status={status}
-              setstopSchedule={setstopSchedule}
-              stopShedules={stopSchedule}
+              stopSchedule={stopSchedule}
               setstop={setstop}
               stop={stop}
             ></StopList>
@@ -81,9 +81,11 @@ export const App = () => {
               alignItems: "center",
             }}
           >
-            <Map NearbyStops={NearbyStops} coordintes={coordinate}></Map>
+          
+           <Map NearbyStops={NearbyStops} coordintes={coordinate}></Map>       
           </Grid>
         </Grid>
+      
       </ThemeProvider>
     </CssBaseline>
   );

@@ -1,7 +1,7 @@
 const stopnoReducer = (state='',action) =>{
     switch(action.type){
-        case'SET':{
-            return state = 1
+        case 'CHANGESTOPNO':{
+            return state=action.payload
         }
         default:{
             return state

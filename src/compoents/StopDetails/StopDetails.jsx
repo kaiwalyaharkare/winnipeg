@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Chip } from '@material-ui/core';
+import {useDispatch,useSelector} from 'react-redux'
+import { setstopno } from '../../redux/Actions';
 const styles = {
  
   card: {
@@ -34,7 +36,11 @@ const styles = {
 function StopDetails(props) {
   const { classes } = props;
   const bull = <span className={classes.bullet}>•</span>;
-
+  const stopno = useSelector(state=>state.stopno)
+  const dispatch = useDispatch()
+  const handleclick=()=>{
+   dispatch(setstopno(document.getElementById('stopno').value)) 
+  }
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -46,7 +52,7 @@ function StopDetails(props) {
         {props.Name}
         </Typography>
         <Typography className={classes.pos} color="primary">
-        <Chip label={props.Number} /> 
+        <Chip id="stopno" label={props.Number} clickable onClick={handleclick}/> 
         </Typography>
       </CardContent>
       {/* <CardActions>

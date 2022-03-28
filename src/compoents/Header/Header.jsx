@@ -15,21 +15,13 @@ import { Link as RouterLink } from "react-router-dom";
 
 const headersData = [
   {
-    label: "Listings",
-    href: "/listings",
+    label: "About Me",
+    href: "/Me",
   },
   {
-    label: "Mentors",
-    href: "/mentors",
-  },
-  {
-    label: "My Account",
-    href: "/account",
-  },
-  {
-    label: "Log Out",
-    href: "/logout",
-  },
+    label: "Home",
+    href: "/",
+  }
 ];
 
 const useStyles = makeStyles(() => ({
@@ -152,7 +144,7 @@ export default function Header() {
 
   const femmecubatorLogo = (
     <Typography variant="h6" component="h1" className={logo}>
-      The Hitchhiker's Guide to Winnipeg 
+      The Hitchhiker's Guide to Winnipeg's Transit
     </Typography>
   );
 
