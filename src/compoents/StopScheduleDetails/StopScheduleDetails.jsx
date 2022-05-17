@@ -18,9 +18,9 @@ const styles = {
 
     minWidth: 275,
   },
-  li :{'list-style-type': 'none'},
-  ul:{
-    'list-style-type':'none'
+  li: { "list-style-type": "none" },
+  ul: {
+    "list-style-type": "none",
   },
   bullet: {
     display: "inline-block",
@@ -35,29 +35,53 @@ const styles = {
     marginBottom: 12,
   },
 };
-
+const totime = (date) => {
+  const time = new Date(date).toLocaleTimeString("en", {
+    timeStyle: "short",
+    hour12: false,
+    timeZone: "UTC",
+  });
+  return time;
+};
 function StopDetails(props) {
   const { classes } = props;
   const bull = <span className={classes.bullet}>•</span>;
   const schedule = props.Schedule;
   console.log(schedule);
 
+  const myDate = "2012-10-16T11:00:28.556094Z";
+  const time = new Date(myDate).toLocaleTimeString("en", {
+    timeStyle: "short",
+    hour12: false,
+    timeZone: "UTC",
+  });
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary">
-          <Chip label={props.Name +"  Stop Schedule"} color="primary" />
+          <Chip label={props.Name + "  Stop Schedule"} color="primary" />
         </Typography>
         <Typography component="h2"></Typography>
         <Typography className={classes.pos} color="primary">
           {schedule?.map((schedul, i) => (
             <ui className={classes.ui}>
-              <ui className={classes.ui} >
+              <ui className={classes.ui}>
                 {schedul?.["scheduled-stops"].map((stops, i) => (
                   <ui className={classes.ui}>
-                    <li m={"10%"} className={classes.li}><Chip label={stops.variant?.name} color="primary" m={"5%"}></Chip></li>
-                    <li className={classes.li}><Chip label={stops.times.arrival?.estimated}variant="outlined" color="primary"></Chip></li>
-                  
+                    <li m={"10%"} className={classes.li}>
+                      <Chip
+                        label={stops.variant?.name}
+                        color="primary"
+                        m={"5%"}
+                      ></Chip>
+                    </li>
+                    <li className={classes.li}>
+                      <Chip
+                        label={ totime( stops.times.arrival?.estimated)}
+                        variant="outlined"
+                        color="primary"
+                      ></Chip>
+                    </li>
                   </ui>
                 ))}
               </ui>

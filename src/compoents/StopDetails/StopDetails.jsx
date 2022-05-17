@@ -34,8 +34,8 @@ const styles = {
 };
 
 function StopDetails(props) {
+  const coords = props.Lat+','+props.Lon
   const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
   const stopno = useSelector(state=>state.stopno)
   const dispatch = useDispatch()
   const handleclick=()=>{
@@ -55,9 +55,11 @@ function StopDetails(props) {
         <Chip id="stopno" label={props.Number} clickable onClick={handleclick}/> 
         </Typography>
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
+      <CardActions>
+        {console.log(props.Lat,props.Lon)}
+        
+        <Button size="small" onClick={()=>window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${coords}`)}>Navigate</Button>
+      </CardActions>
     </Card>
   );
 }

@@ -15,9 +15,9 @@ export const getNearbystops = async (lat, lng, radius) => {
   try {
     if (lat && lng && radius) {
       const { data } = await axios.get(
-        `https://api.winnipegtransit.com/v3/stops.json?api-key=4aH9zYUORhi2cVxdGsJv&distance=${radius}`,
+        `https://api.winnipegtransit.com/v3/stops.json?distance=${radius}`,
         {
-          params: { lat: lng, lon: lat },
+          params: { lat: lng, lon: lat,'api-key':'4aH9zYUORhi2cVxdGsJv' },
         }
       );
       return data;
@@ -28,12 +28,14 @@ export const getNearbystops = async (lat, lng, radius) => {
 };
 
 export const getStopschedule = async (stopSchedule) => {
+
+  var isoDate = new Date().toISOString()
   try {
     if (stopSchedule && Date.now()) {
       const { data } = await axios.get(
-        `https://api.winnipegtransit.com/v3/stops/${stopSchedule}/schedule.json?/schedule?max-results-per-route=2&api-key=4aH9zYUORhi2cVxdGsJv`,
+        `https://api.winnipegtransit.com/v3/stops/${stopSchedule}/schedule.json?/schedule?max-results-per-route=2`,
         {params:
-         {start:'2022-03-30T21:00:00'},
+         {start: isoDate,'api-key':'4aH9zYUORhi2cVxdGsJv'},
         }
       );
       return data;
