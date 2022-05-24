@@ -3,7 +3,7 @@ import { AxiosRequestConfig } from "axios";
 export const getstatus = async () => {
   try {
     const status = await axios.get(
-      "https://api.winnipegtransit.com/v3/statuses/schedule.json?api-key=4aH9zYUORhi2cVxdGsJv"
+      "https://api.winnipegtransit.com/v3/statuses/schedule.json?api-key="
     );
     return status;
   } catch (error) {
@@ -17,7 +17,7 @@ export const getNearbystops = async (lat, lng, radius) => {
       const { data } = await axios.get(
         `https://api.winnipegtransit.com/v3/stops.json?distance=${radius}`,
         {
-          params: { lat: lng, lon: lat,'api-key':'4aH9zYUORhi2cVxdGsJv' },
+          params: { lat: lng, lon: lat,'api-key':'' },
         }
       );
       return data;
@@ -35,7 +35,7 @@ export const getStopschedule = async (stopSchedule) => {
       const { data } = await axios.get(
         `https://api.winnipegtransit.com/v3/stops/${stopSchedule}/schedule.json?/schedule?max-results-per-route=2`,
         {params:
-         {start: isoDate,'api-key':'4aH9zYUORhi2cVxdGsJv'},
+         {start: isoDate,'api-key':''},
         }
       );
       return data;
@@ -45,6 +45,3 @@ export const getStopschedule = async (stopSchedule) => {
   }
 };
 
-// https://api.winnipegtransit.com/v3/stops.json?api-key=4aH9zYUORhi2cVxdGsJv&lat=49.895&lon=-97.138&distance=250
-
-// https://api.winnipegtransit.com/v3/stops.json?api-key=4aH9zYUORhi2cVxdGsJv&distance=250&lat=-97.138&lon=49.895
